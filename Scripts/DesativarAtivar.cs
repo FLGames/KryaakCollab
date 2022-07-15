@@ -4,9 +4,8 @@ using UnityEngine;
 [RequireComponent(typeof(BoxCollider))]
 public class DesativarAtivar : MonoBehaviour
 {
-
-    public GameObject[] objParaAtivar;
-    public GameObject[] objParaDesativar;
+    [SerializeField]
+    private GameObject[] objParaAtivar, objParaDesativar;
 
     void Start()
     {
@@ -15,14 +14,9 @@ public class DesativarAtivar : MonoBehaviour
 
     void OnTriggerEnter()
     {
-        for (int x = 0; x < objParaAtivar.Length; x++)
-        {
-            objParaAtivar[x].gameObject.SetActive(true);
-        }
-        for (int x = 0; x < objParaDesativar.Length; x++)
-        {
-            objParaDesativar[x].gameObject.SetActive(false);
-        }
+        foreach (GameObject obj in objParaAtivar)
+            obj.gameObject.SetActive(true); 
+        foreach (GameObject obj in objParaDesativar)
+            obj.gameObject.SetActive(false);
     }
-
 }
