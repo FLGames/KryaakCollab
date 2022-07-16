@@ -1,16 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using HFPS.Systems;
 
 public class audioaleatorio : MonoBehaviour
 {
-    [SerializeField]
-    private AudioClip[] audios1, audios2, audios3, audios4, audios5;
+    [SerializeField] private AudioClip[] audios1, audios2, audios3, audios4, audios5;
     private AudioClip[] audios;
-    [SerializeField]
-    private AudioClip vaultTip, calendarTip, scareAudio;
+    [SerializeField] private AudioClip vaultTip, calendarTip, scareAudio;
     private AudioSource source;
-
+    [SerializeField] private InteractiveLight switchLight;
     private void Start()
     { 
         source = GetComponent<AudioSource>();
@@ -49,8 +48,8 @@ public class audioaleatorio : MonoBehaviour
     IEnumerator lightOff()
     {
         yield return new WaitForSeconds(Random.Range(60, 360));
-        //APAGA A LUZ
+        if(switchLight.isPoweredOn)
+            switchLight.UseObject();
         StartCoroutine("lightOff");
     }
-
 }
